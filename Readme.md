@@ -75,7 +75,7 @@ PocketbaseMobile.registerNativeBridgeCallback { command, data ->
 
 checkout [pocketbase_server_android_example](https://github.com/rohitsangwan01/pocketbase_server_android_example)
 
-![](https://github.com/rohitsangwan01/pocketbase_mobile/assets/59526499/c8a62bdc-6c91-4da1-b5e1-834ae736aa2c)
+![](https://github.com/rohitsangwan01/pocketbase_mobile/assets/59526499/ff2c277a-bc9e-456c-b089-42fd264f61e3)
 
 
 # Extras
