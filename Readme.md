@@ -78,5 +78,8 @@ checkout [pocketbase_server_android_example](https://github.com/rohitsangwan01/p
 ![](https://github.com/rohitsangwan01/pocketbase_mobile/assets/59526499/c8a62bdc-6c91-4da1-b5e1-834ae736aa2c)
 
 
+# Extras
+
+Checkout a Flutter chatapp built using pocketbase: [flutter_pocketbase_chat](https://github.com/rohitsangwan01/flutter_pocketbase_chat)
 
 
