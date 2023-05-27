@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"syscall"
 
 	"github.com/labstack/echo/v5"
 	"github.com/pocketbase/pocketbase"
@@ -13,16 +14,17 @@ import (
 // Java Callbacks, make sure to register them before starting pocketbase
 // to expose any method to java, add that with FirstLetterCapital
 var nativeBridge NativeBridge
+var version string = "0.0.1"
 
 func RegisterNativeBridgeCallback(c NativeBridge) { nativeBridge = c }
 
-func StartPocketbase(path string, hostname string, port string) {
+func StartPocketbase(path string, hostname string, port string, getApiLogs bool) {
 	os.Args = append(os.Args, "serve", "--http", hostname+":"+port)
 	appConfig := pocketbase.Config{
 		DefaultDataDir: path,
 	}
 	app := pocketbase.NewWithConfig(&appConfig)
-	setupPocketbaseCallbacks(app)
+	setupPocketbaseCallbacks(app, getApiLogs)
 
 	serverUrl := "http://" + hostname + ":" + port
 	sendCommand("onServerStarting", fmt.Sprintln("Server starting at:", serverUrl+"\n",
@@ -35,7 +37,11 @@ func StartPocketbase(path string, hostname string, port string) {
 
 func StopPocketbase() {
 	sendCommand("log", "Stopping pocketbase...")
-	os.Exit(0)
+	syscall.Kill(syscall.Getpid(), syscall.SIGINT)
+}
+
+func GetVersion() string {
+	return version
 }
 
 // Helper methods
@@ -49,10 +55,13 @@ func sendCommand(command string, data string) string {
 }
 
 // Hooks :https://pocketbase.io/docs/event-hooks/
-func setupPocketbaseCallbacks(app *pocketbase.PocketBase) {
+func setupPocketbaseCallbacks(app *pocketbase.PocketBase, getApiLogs bool) {
 	// Setup callbacks
 	app.OnBeforeServe().Add(func(e *core.ServeEvent) error {
 		sendCommand("OnBeforeServe", "")
+		if getApiLogs {
+			e.Router.Use(ApiLogsMiddleWare(app))
+		}
 		// setup a native Get request handler
 		e.Router.AddRoute(echo.Route{
 			Method: http.MethodGet,
@@ -95,4 +104,16 @@ func setupPocketbaseCallbacks(app *pocketbase.PocketBase) {
 		sendCommand("OnTerminate", "")
 		return nil
 	})
+}
+
+// Middleware, this will log all api calls
+func ApiLogsMiddleWare(app core.App) echo.MiddlewareFunc {
+	return func(next echo.HandlerFunc) echo.HandlerFunc {
+		return func(c echo.Context) error {
+			request := c.Request()
+			fullPath := request.URL.Host + request.URL.Path + "?" + request.URL.RawQuery
+			sendCommand("apiLogs", fullPath)
+			return next(c)
+		}
+	}
 }

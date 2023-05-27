@@ -38,10 +38,10 @@ private val uiScope = CoroutineScope(Dispatchers.Main + Job())
 To start pocketbase
 
 ```kotlin
-// use dataPath where app have write access, for example temporary cache path `context.cacheDir.absolutePath`
+// use dataPath where app have write access, for example temporary cache path `context.cacheDir.absolutePath` or filePath
 uiScope.launch {
     withContext(Dispatchers.IO) {
-        PocketbaseMobile.startPocketbase(dataPath, hostname, port)
+        PocketbaseMobile.startPocketbase(dataPath, hostname, port, enableApiLogs)
     }
 }
 ```
