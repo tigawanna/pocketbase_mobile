@@ -18,7 +18,7 @@ This will generate two files: `pocketbaseMobile-sources.jar` and `pocketbaseMobi
 run : `gomobile bind --target ios`
 
 
-## Native android setup
+# Native android setup
 
 add a folder in `Project>app>libs` and add `pocketbaseMobile.aar` file genreated using gomobile
 
