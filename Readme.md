@@ -12,7 +12,8 @@ run :  `gomobile bind -androidapi 19` for android
 This will generate two files: `pocketbaseMobile-sources.jar` and `pocketbaseMobile.aar`, import these in android and use
 
 run : `gomobile bind --target ios` for ios
-or try : `gomobile bind -ldflags='-extldflags=-libresolv.tbd' -target=ios`, checkout [this](https://github.com/golang/go/issues/58416) if you get any error while compiling ios app after including this framework
+
+or try : `gomobile bind -ldflags='-extldflags=-libresolv.tbd' -target=ios`
 
 # Native android setup
 
@@ -70,6 +71,12 @@ PocketbaseMobile.registerNativeBridgeCallback { command, data ->
     "response from native"
 }
 ```
+
+
+# Native ios setup
+
+Download `PocketbaseMobile.xcframework.zip` and extract, then add this to ios project, checkout [this](https://github.com/golang/go/issues/58416) if you get any error while compiling ios app after including this framework
+
 
 # Exampels
 
