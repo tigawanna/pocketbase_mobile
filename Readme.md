@@ -97,6 +97,13 @@ checkout [Pocketbase Server Android](https://github.com/rohitsangwan01/pocketbas
 <img src="https://github.com/rohitsangwan01/pocketbase_mobile/assets/59526499/ff2c277a-bc9e-456c-b089-42fd264f61e3" height="300">
 <img src="https://github.com/rohitsangwan01/pocketbase_mobile/assets/59526499/93b668c8-600f-4232-b2bb-3562ccbde32e" height="300">
 
+# Usecase
+
+- To create a secure localChat server or maybe a file storage system or anything which provided by pocketBase
+- To use an old android device as local server to host PocketBase
+- To use a mobile app which is based on PocketBase, so we can simply run PocketBase server within mobile and show demo of our application, useful for someone who don't want to host pocketBase yet
+- To use Pocketbase as a College project,and for students team who want to show demo of a mobile app but can't afford hosting or something , so all they have to do is , run pocketBase server from there mobile and their main app which is based on pocketBase is ready to use
+
 # Extras
 
 Checkout a Flutter chatapp built using pocketbase: [flutter_pocketbase_chat](https://github.com/rohitsangwan01/flutter_pocketbase_chat)
