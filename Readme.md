@@ -13,9 +13,11 @@ run : `gomobile bind --target ios` for IOS or try : `gomobile bind -ldflags='-ex
 
 # Usage
 
-Checkout [pocketbase_android](https://github.com/rohitsangwan01/pocketbase_android) to use in native Android
+[pocketbase_server_flutter](https://github.com/rohitsangwan01/pocketbase_server_flutter) to use in Flutter
+
+[pocketbase_android](https://github.com/rohitsangwan01/pocketbase_android) to use in native Android
  
-Checkout [pocketbase_ios](https://github.com/rohitsangwan01/pocketbase_ios) to use in native IOS
+[pocketbase_ios](https://github.com/rohitsangwan01/pocketbase_ios) to use in native IOS
 
 # Examples
 
