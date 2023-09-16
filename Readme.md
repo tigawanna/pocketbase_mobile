@@ -15,72 +15,16 @@ run : `gomobile bind --target ios` for ios
 
 or try : `gomobile bind -ldflags='-extldflags=-libresolv.tbd' -target=ios`
 
-# Native android setup
+# Usage
 
-add a folder in `Project>app>libs` and add `pocketbaseMobile.aar` file genreated using gomobile
-
-import in app level `build.gradle`
-
-```gradle
-dependencies {
-    ...
-    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
-}
-```
-
-## Usage
-
-Use CoroutineScope to call pocketbase methods ( import kotlin coroutines libraries)
-
-```kotlin
-private val uiScope = CoroutineScope(Dispatchers.Main + Job())
-```
-
-To start pocketbase
-
-```kotlin
-// use dataPath where app have write access, for example temporary cache path `context.cacheDir.absolutePath` or filePath
-uiScope.launch {
-    withContext(Dispatchers.IO) {
-        PocketbaseMobile.startPocketbase(dataPath, hostname, port, enableApiLogs)
-    }
-}
-```
-
-To stop pocketbase
-
-```kotlin
-uiScope.launch {
-    withContext(Dispatchers.IO) {
-        PocketbaseMobile.stopPocketbase()
-    }
-}
-```
-
-To listen pocketbase events, and also handle custom api requests
-
-`pocketbaseMobile` have two custom routes as well ,`/api/nativeGet` and `/api/nativePost`, we can
-get these routes in this callback and return response from kotlin
-
-```kotlin
-PocketbaseMobile.registerNativeBridgeCallback { command, data ->
-    this.runOnUiThread {
-        // Update ui from here
-    }
-    // return response back to pocketbase
-    "response from native"
-}
-```
+Checkout [pocketbase_android](https://github.com/rohitsangwan01/pocketbase_android) to use in native Android
+ 
+Checkout [pocketbase_ios](https://github.com/rohitsangwan01/pocketbase_ios) to use in native IOS
 
 
-# Native ios setup
+Checkout 
 
-Download `PocketbaseMobile.xcframework.zip` and extract, then add this to ios project, checkout [this](https://github.com/golang/go/issues/58416) if you get any error while compiling ios app after including this framework
-
-![](https://github.com/rohitsangwan01/pocketbase_mobile/assets/59526499/39aeb478-a291-4354-9387-30d8992ee7f9)
-
-
-# Exampels
+# Examples
 
 
 checkout [Pocketbase Server Flutter](https://github.com/rohitsangwan01/pocketbase_server_flutter) for android and ios implementation in flutter
@@ -106,6 +50,6 @@ checkout [Pocketbase Server Android](https://github.com/rohitsangwan01/pocketbas
 
 # Extras
 
-Checkout a Flutter chatapp built using pocketbase: [flutter_pocketbase_chat](https://github.com/rohitsangwan01/flutter_pocketbase_chat)
+Checkout a Flutter chatApp built using pocketbase: [flutter_pocketbase_chat](https://github.com/rohitsangwan01/flutter_pocketbase_chat)
 
 
